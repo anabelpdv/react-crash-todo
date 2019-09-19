@@ -1,7 +1,10 @@
 import React from 'react';
 import Todos from './components/Todos.js';
+import AddTodo from './components/AddTodo.js';
 import './App.css';
 import TodoItem from './components/TodoItem.js';
+import Header from './components/layout/header';
+
 
 class App extends React.Component {
   state = {
@@ -14,7 +17,7 @@ class App extends React.Component {
       {
         id:2,
         title: 'Dinner with wife',
-        completed: true,
+        completed: false,
       },
       {
         id:3,
@@ -34,10 +37,17 @@ class App extends React.Component {
   })
   }
 
+  delTodo = (id)=>{
+    this.setState({todos:[...this.state.todos.filter(todo=> todo.id !== id
+    )]});
+  }
+
   render(){
     return (
       <div className="App">
-        <Todos todos = {this.state.todos} markComplete={this.markComplete}/>
+        <Header/>
+        <AddTodo />
+        <Todos todos = {this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo}/>
       </div>
     );
   }
